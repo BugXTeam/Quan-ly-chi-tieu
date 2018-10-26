@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Quản lý chi tiêu</string>
-    <string name="add_layout_name">Thêm chi tiêu</string>
-    <string name="edit_layout_name">Chỉnh sửa chi tiêu</string>
-    <string name="add_money">Nhập số tiền</string>
-</resources>
