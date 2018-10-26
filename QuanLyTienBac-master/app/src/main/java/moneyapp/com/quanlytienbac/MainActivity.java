@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     static Database database;
     ListView listView;
-    private FloatingActionButton floatingActionButton;
     static ArrayList<Item> arrayList;
+    FloatingActionButton floatingActionButton;
     static ItemAdapter itemAdapter;
     static String databaseName="Items3";
 
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         //database.queryData("delete from Item");
 
         selectData();
-
     }
 
     public static void selectData() {
@@ -147,8 +145,6 @@ public class MainActivity extends AppCompatActivity {
         dialogXoa.setNegativeButton("Không", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-
             }
         });
         dialogXoa.show();

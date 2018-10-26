@@ -12,6 +12,7 @@ public class Item {
         this.ten = ten;
         this.ngay = ngay;
         this.tien = tien;
+
     }
 
     public int getId() {

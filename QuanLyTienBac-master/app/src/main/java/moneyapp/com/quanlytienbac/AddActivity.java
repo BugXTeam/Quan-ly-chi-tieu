@@ -74,6 +74,7 @@ public class AddActivity extends AppCompatActivity {
                     Toast.makeText(AddActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     MainActivity.selectData();
                     startActivity(new Intent(AddActivity.this,MainActivity.class));
+
                 }
 
             }
@@ -83,7 +84,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void previous(View view){
-        startActivity(new Intent(AddActivity.this, MainActivity.class));
+        finish();
+        //startActivity(new Intent(AddActivity.this, MainActivity.class));
     }
 
 

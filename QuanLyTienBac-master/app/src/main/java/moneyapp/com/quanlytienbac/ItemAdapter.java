@@ -1,6 +1,5 @@
 package moneyapp.com.quanlytienbac;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
@@ -10,15 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -55,8 +51,6 @@ public class ItemAdapter extends BaseAdapter {
         ImageButton imgbt1, imgbt2;
 
     }
-
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -105,6 +99,5 @@ public class ItemAdapter extends BaseAdapter {
 
         return convertView;
     }
-
 
 }
