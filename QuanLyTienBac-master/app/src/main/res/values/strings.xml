@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Quản lý chi tiêu</string>
+    <string name="item_name">Mô tả</string>
+    <string name="item_date">Nhập ngày</string>
+    <string name="item_price">Giá</string>
+    <string name="item_add">Thêm</string>
+    <string name="item_update">Cập nhật</string>
+    <string name="item_cancel">Hủy</string>
+</resources>
