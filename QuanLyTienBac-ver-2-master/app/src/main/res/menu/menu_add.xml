@@ -7,5 +7,10 @@
         app:showAsAction="always"
         android:id="@+id/menuAdd"></item>
 
+    <item
+        android:title="@string/app_name_about"
+        android:icon="@drawable/baseline_help_outline_white_24"
+        app:showAsAction="always"
+        android:id="@+id/menuAbout"></item>
 
 </menu>

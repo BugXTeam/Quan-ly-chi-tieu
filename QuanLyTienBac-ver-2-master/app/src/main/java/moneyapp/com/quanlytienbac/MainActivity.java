@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         itemAdapter = new ItemAdapter(this, R.layout.listview_custom, arrayList);
         listView.setAdapter(itemAdapter);
 
+        //Gọi vị trí button add và khởi chạy AddActivity
         floatingActionButton = findViewById(R.id.floatingButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -57,12 +58,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //Tạo database
         database = new Database(this, "quanly8", null, 1);
         database.queryData("create table if not exists '"+databaseName+"'(Id integer primary key autoincrement,Ten nvarchar(70),Ngay nvarchar(50),Tien integer)");
         //database.queryData("insert into Item values(null,'khang','20/11',2000)");
         //database.queryData("delete from Item");
 
         selectData();
+        //Sum tổng tiền hiển thị ra trên màn hình MainActivity
         final int tmpPrice=priceSum();
         txt1.setText(format.format(tmpPrice)+" VNĐ");
 
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    //Hàm gọi bảng database
     public static void selectData() {
         Cursor dataItem = database.getData("select * from '"+databaseName+"'");
         arrayList.clear();
@@ -84,9 +88,12 @@ public class MainActivity extends AppCompatActivity {
         }
         itemAdapter.notifyDataSetChanged();
     }
+
+    //Hàm sum tổng tiền
     public static int priceSum()
     {
         int total=0;
+        //Câu lệnh sum
         Cursor price=database.getData("select sum(Tien) from '"+databaseName+"'");
         while (price.moveToNext())
         {
@@ -97,37 +104,46 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Khởi tạo menu trên thanh Toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    //Khởi tạo chức năng cho menu trên thanh Toolbar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menuAdd) {
+        if (id == R.id.menuAdd) {   //Nếu vị trí là menuAdd thì khởi chạy AddActivity
             startActivity(new Intent(MainActivity.this, AddActivity.class));
+        }
+        else if(id == R.id.menuAbout){  //Nếu vị trí là menuAbout thì khởi chạy AboutActivity
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
 
+
+    //Hàm cập nhật thông tin dạng dialog
     public void dialog(final int id, final String ten, final String ngay, final String gia)
     {
-        txt1=(TextView) findViewById(R.id.txtPriceSum);
+        txt1=(TextView) findViewById(R.id.txtPriceSum); //Gọi vị trí TextView txtPriceSum
         final Dialog dialog=new Dialog(this);
         dialog.setContentView(R.layout.dialog_edit);
         final EditText edt1,edt2,edt3;
         Button bt1;
-        edt1=(EditText)dialog.findViewById(R.id.edtMota);
-        edt2=(EditText) dialog.findViewById(R.id.edtNgay);
-        edt3=(EditText)dialog.findViewById(R.id.edtGiaDialog);
-        bt1=(Button) dialog.findViewById(R.id.btAddDialog);
+        edt1=(EditText)dialog.findViewById(R.id.edtMota);   //Gọi vị trí EditText edtMota
+        edt2=(EditText) dialog.findViewById(R.id.edtNgay);  //Gọi vị trí EditText edtNgay
+        edt3=(EditText)dialog.findViewById(R.id.edtGiaDialog);  //Gọi vị trí EditText edtGiaDialog
+        bt1=(Button) dialog.findViewById(R.id.btAddDialog); //Gọi vị trí EditText edtAddDialog
 
+        //SetText các giá trị
         edt1.setText(ten);
         edt2.setText(ngay);
         edt3.setText(gia+"");
 
+        //Sự kiện chọn ngày
         edt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Sự kiện cập nhật thông tin
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,52 +160,54 @@ public class MainActivity extends AppCompatActivity {
                 String giaMoi=edt3.getText().toString();
                 if(tenMoi.equals("") && ngayMoi.equals("") && giaMoi.equals(""))
                 {
-                    Toast.makeText(MainActivity.this, "Vui lòng cập nhật đủ thông tin", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Vui lòng cập nhật đủ thông tin", Toast.LENGTH_SHORT).show(); //Thông báo hiển thị khi có 1 trường bị bỏ trống
 //                    int x=priceSum();
 //                    txt1.setText(format.format(x)+ " VNĐ");
 
                 }
                 else
                 {
-                    database.queryData("update '"+databaseName+"' set Ten='"+tenMoi+"',Ngay='"+ngayMoi+"',Tien='"+giaMoi+"' where Id='"+id+"'");
-                    dialog.dismiss();
-                    selectData();
+                    database.queryData("update '"+databaseName+"' set Ten='"+tenMoi+"',Ngay='"+ngayMoi+"',Tien='"+giaMoi+"' where Id='"+id+"'");    //query cập nhật dữ liệu vào trong database
+                    dialog.dismiss();   //Tắt màn hình cập nhật dạng dialog
+                    selectData();   //Refresh lại dữ liệu trên màn hình
                     Intent intent = getIntent();
-                    finish();
+                    finish();   //Dừng sự kiện cập nhật
                     startActivity(intent);
                 }
 
             }
         });
 
-        dialog.show();
+        dialog.show();  //Hiển thị màn hình cập nhật dữ liệu
 
     }
+
+    //Hàm xóa 1 dữ liệu
     public void dialogXoa(String ten, final int id)
     {
         txt1=(TextView) findViewById(R.id.txtPriceSum);
-        final AlertDialog.Builder dialogXoa=new AlertDialog.Builder(this);
-        dialogXoa.setMessage("Bạn có muốn xóa "+ten+" không?");
-        dialogXoa.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder dialogXoa=new AlertDialog.Builder(this);  //Tạo mới 1 message box
+        dialogXoa.setMessage("Bạn có muốn xóa "+ten+" không?"); //Hiển thị thông báo
+        dialogXoa.setPositiveButton("Có", new DialogInterface.OnClickListener() {   //Tại sự kiện click "có"
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which) {    //Sự kiện xóa dữ liệu trong database
                 database.queryData("delete from '"+databaseName+"' where Id='"+id+"'");
-                Toast.makeText(MainActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                selectData();
+                Toast.makeText(MainActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show(); //Hiển thị thông báo xóa thành công
+                selectData();   //Refresh lại dữ liệu trên màn hình
 //                int x=priceSum();
 //                txt1.setText(format.format(x)+ " VNĐ");
                 Intent intent = getIntent();
-                finish();
+                finish();   //Dừng sự kiện xóa
                 startActivity(intent);
 
             }
         });
-        dialogXoa.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+        dialogXoa.setNegativeButton("Không", new DialogInterface.OnClickListener() {    //Tại sự kiện click "không"
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which) {    //Không làm gì cả
             }
         });
-        dialogXoa.show();
+        dialogXoa.show();   //Hiển thị màn hình dialogXoa
     }
 
 }
