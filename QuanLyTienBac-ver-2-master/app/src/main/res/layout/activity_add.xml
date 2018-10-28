@@ -147,7 +147,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/colorAccent"
+            android:backgroundTint="@color/colorButton2"
             android:text="@string/item_add"
             android:textAlignment="center"
             android:textAllCaps="true"

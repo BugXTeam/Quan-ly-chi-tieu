@@ -5,7 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Handler;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,8 +21,6 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -187,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
     {
         txt1=(TextView) findViewById(R.id.txtPriceSum);
         final AlertDialog.Builder dialogXoa=new AlertDialog.Builder(this);  //Tạo mới 1 message box
+        dialogXoa.setCancelable(true);
         dialogXoa.setMessage("Bạn có muốn xóa "+ten+" không?"); //Hiển thị thông báo
         dialogXoa.setPositiveButton("Có", new DialogInterface.OnClickListener() {   //Tại sự kiện click "có"
             @Override
@@ -205,9 +204,12 @@ public class MainActivity extends AppCompatActivity {
         dialogXoa.setNegativeButton("Không", new DialogInterface.OnClickListener() {    //Tại sự kiện click "không"
             @Override
             public void onClick(DialogInterface dialog, int which) {    //Không làm gì cả
+                dialog.cancel();
             }
         });
-        dialogXoa.show();   //Hiển thị màn hình dialogXoa
+        //dialogXoa.show();   //Hiển thị màn hình dialogXoa
+        AlertDialog xoa = dialogXoa.create();
+        xoa.show();
     }
 
 }

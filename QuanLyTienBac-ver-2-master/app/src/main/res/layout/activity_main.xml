@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Theme.AppCompat.Light.DarkActionBar"
     tools:context=".MainActivity">
 
 
@@ -36,6 +37,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="25dp"
+            android:backgroundTint="@color/colorButton2"
             android:src="@drawable/round_add_white_48"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -76,8 +76,8 @@ public class AddActivity extends AppCompatActivity {
                     MainActivity.database.queryData("insert into '"+MainActivity.databaseName+"' values(null,'"+tmpName+"','"+tmpDate+"','"+tmpPrice+"')"); //Insert dữ liệu vào database
                     Toast.makeText(AddActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     MainActivity.selectData();  //Refresh dữ liệu ở màn hình MainActivity
-                    finish();   //Kết thúc sự kiện thêm
                     startActivity(new Intent(AddActivity.this,MainActivity.class)); //Quay lại giao diện MainActivity
+                    finish();   //Kết thúc sự kiện thêm
                 }
 
             }
