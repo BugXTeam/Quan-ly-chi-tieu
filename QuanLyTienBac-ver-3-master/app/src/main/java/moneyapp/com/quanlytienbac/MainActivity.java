@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 String tenMoi=edt1.getText().toString().trim();
                 String ngayMoi=edt2.getText().toString().trim();
                 String giaMoi=edt3.getText().toString();
-                if(tenMoi.equals("") && ngayMoi.equals("") && giaMoi.equals(""))
+                if(tenMoi.equals("") || ngayMoi.equals("") || giaMoi.equals(""))
                 {
                     Toast.makeText(MainActivity.this, "Vui lòng cập nhật đủ thông tin", Toast.LENGTH_SHORT).show(); //Thông báo hiển thị khi có 1 trường bị bỏ trống
 //                    int x=priceSum();
@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     database.queryData("update '"+databaseName+"' set Ten='"+tenMoi+"',Ngay='"+ngayMoi+"',Tien='"+giaMoi+"' where Id='"+id+"'");    //query cập nhật dữ liệu vào trong database
                     dialog.dismiss();   //Tắt màn hình cập nhật dạng dialog
+                    Toast.makeText(MainActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                     selectData();   //Refresh lại dữ liệu trên màn hình
                     Intent intent = getIntent();
                     finish();   //Dừng sự kiện cập nhật

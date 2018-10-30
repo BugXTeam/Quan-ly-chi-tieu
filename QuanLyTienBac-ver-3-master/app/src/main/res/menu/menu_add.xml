@@ -8,9 +8,9 @@
         android:id="@+id/menuAdd"></item>
 
     <item
+        android:id="@+id/menuAbout"
+        android:icon="@drawable/ic_help_outline_black_24dp"
         android:title="@string/app_name_about"
-        android:icon="@drawable/baseline_help_outline_white_24"
-        app:showAsAction="always"
-        android:id="@+id/menuAbout"></item>
+        app:showAsAction="always"></item>
 
 </menu>
